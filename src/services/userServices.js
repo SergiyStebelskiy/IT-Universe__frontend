@@ -14,9 +14,9 @@ export default {
 		try {
 			const result = await axios.post("/login", params);
 			if (result.status === 200) {
-				axios.defaults.headers["Authorization"] = result.data;
+				axios.defaults.headers["Authorization"] = result.data.access_token;
 			}
-			save("accessToken", result.data);
+			save("accessToken", result.data.access_token);
 			return result;
 		} catch (error) {
 			throw error;

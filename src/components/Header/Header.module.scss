@@ -1,0 +1,37 @@
+@import "../../uiKit/colors";
+.header {
+	background-color: $primary_main;
+	.wrap {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 67px;
+	}
+	.logo {
+		color: white;
+		text-decoration: none;
+		text-transform: uppercase;
+		font-weight: 600;
+		letter-spacing: 1px;
+		font-size: 18px;
+	}
+	.avatar {
+		cursor: pointer;
+	}
+	.btnWrap {
+		display: flex;
+		.login {
+			margin-right: 16px;
+			color: white;
+			height: 44px;
+		}
+		.registration {
+			background-color: white;
+			border: none;
+			height: 44px;
+			&:hover {
+				background-color: rgba(white, .9);
+			}
+		}
+	}
+}

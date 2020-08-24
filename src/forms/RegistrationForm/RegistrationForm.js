@@ -26,7 +26,7 @@ const RegistrationForm = ({ onSubmit, loading, success, error }) => {
 	const { handleSubmit, handleChange, values, errors } = formik;
 	return (
 		<Box className={s.registrationFormWrap} boxShadow={3}>
-			<form className={s.registrationForm} onSubmit={handleSubmit}>
+			<form className={s.registrationForm} onSubmit={handleSubmit} autoComplete="off">
 				<Input
 					value={values.name}
 					onChange={handleChange}
@@ -37,7 +37,7 @@ const RegistrationForm = ({ onSubmit, loading, success, error }) => {
 					variant="outlined"
 					type="text"
 					name="name"
-					autoComplete="name"
+					autoComplete="off"
 				/>
 				<Input
 					value={values.email}
@@ -49,7 +49,7 @@ const RegistrationForm = ({ onSubmit, loading, success, error }) => {
 					variant="outlined"
 					type="email"
 					name="email"
-					autoComplete="username"
+					autoComplete="off"
 				/>
 				<Input
 					value={values.password}
@@ -61,7 +61,7 @@ const RegistrationForm = ({ onSubmit, loading, success, error }) => {
 					variant="outlined"
 					type="password"
 					name="password"
-					autoComplete="current-password"
+					autoComplete="off"
 				/>
 				<Button
 					className={s.btn}

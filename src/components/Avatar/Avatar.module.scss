@@ -1,0 +1,10 @@
+.avatar {
+	line-height: 1;
+	color: white;
+	&.large {
+		width: 140px;
+		height: 140px;
+		font-size: 44px;
+		font-weight: bold;
+	}
+}

@@ -1,0 +1,11 @@
+@import "../../uiKit/colors";
+.footer {
+	background: $gray_dark;
+	.wrap {
+		height: 28px;
+		display: flex;
+		align-items: center;
+		color: rgba(white, .8);
+		font-size: 12px;
+	}
+}

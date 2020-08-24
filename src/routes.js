@@ -1,24 +1,33 @@
-import React from "react";
+import { GUEST, USER } from "helpers/userRoles";
 import LoginPage from "pages/LoginPage/LoginPage";
 import RegistrationPage from "pages/RegistrationPage/RegistrationPage";
 import ProfilePage from "pages/ProfilePage/ProfilePage";
-import NotFoundPage from "pages/NotFoundPage/NotFoundPage";
+import HomePage from "pages/HomePage/HomePage";
 
-export const routes = [
+const allTypes = `${GUEST}, ${USER}`;
+const authorized = `${USER}`;
+
+const routes = [
 	{
-		component: <LoginPage />,
-		path: "/login"
+		Component: HomePage,
+		path: "/",
+		allowed: allTypes,
+		exact: true
 	},
 	{
-		component: <RegistrationPage />,
-		path: "/registration"
+		Component: LoginPage,
+		path: "/login",
+		allowed: GUEST
 	},
 	{
-		component: <ProfilePage />,
-		path: "/profile"
+		Component: RegistrationPage,
+		path: "/registration",
+		allowed: GUEST
 	},
 	{
-		component: <NotFoundPage />,
-		path: "*"
+		Component: ProfilePage,
+		path: "/profile",
+		allowed: authorized
 	}
 ];
+export default routes;

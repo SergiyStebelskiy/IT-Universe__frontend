@@ -1,0 +1,9 @@
+@import "../../uiKit/colors";
+
+.notFoundPage {
+	height: 100vh;
+	background: white url("../../images/404.jpg") no-repeat center center / auto 100%;
+	.backBtn {
+		margin: 8px 0 0 8px;
+	}
+}
