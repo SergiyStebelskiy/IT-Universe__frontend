@@ -3,6 +3,7 @@ import LoginPage from "pages/LoginPage/LoginPage";
 import RegistrationPage from "pages/RegistrationPage/RegistrationPage";
 import ProfilePage from "pages/ProfilePage/ProfilePage";
 import HomePage from "pages/HomePage/HomePage";
+import PostPage from "pages/PostPage/PostPage";
 
 const allTypes = `${GUEST}, ${USER}`;
 const authorized = `${USER}`;
@@ -28,6 +29,11 @@ const routes = [
 		Component: ProfilePage,
 		path: "/profile",
 		allowed: authorized
+	},
+	{
+		Component: PostPage,
+		path: "/posts/:id",
+		allowed: allTypes
 	}
 ];
 export default routes;

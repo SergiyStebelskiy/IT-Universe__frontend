@@ -30,8 +30,8 @@ agent.interceptors.response.use(
     source = CancelToken.source()
 
     if (
-      error.response?.status === 401 &&
-      originalRequest.url !== "sessions"
+      error.response?.status === 400 &&
+      originalRequest.url !== "/login"
     ) {
       remove("currentUser")
       remove("accessToken")

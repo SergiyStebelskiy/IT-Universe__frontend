@@ -1,0 +1,24 @@
+.postCard {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	position: relative;
+	.header {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 16px;
+	}
+	.titleLink {
+		text-decoration: none;
+		color: inherit;
+	}
+	.title {
+		padding-right: 6px;
+	}
+	.date {
+		position: absolute;
+		right: 16px;
+		bottom: 16px;
+	}
+}

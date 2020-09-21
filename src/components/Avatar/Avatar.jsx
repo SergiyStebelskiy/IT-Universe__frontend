@@ -24,7 +24,7 @@ const Avatar = (props) => {
 			{...props}
 			alt={avatarData && avatarData.name.toUpperCase()}
 			src="null"
-			className={classNames(s.avatar, { [s.large]: size === "large" }, className)}
+			className={classNames(s.avatar, { [s.large]: size === "large", [s.normal]: size === "normal" }, className)}
 			style={{ backgroundImage: getGradient() }}
 		/>
 	);

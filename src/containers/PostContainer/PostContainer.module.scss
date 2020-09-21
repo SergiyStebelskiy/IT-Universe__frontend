@@ -1,0 +1,48 @@
+@import "../../uiKit/colors";
+.postPage {
+	background-color: white;
+	flex: 1;
+	padding: 40px 24px 24px;
+	display: flex;
+	flex-direction: column;
+	.date {
+		opacity: 0.8;
+	}
+	.title {
+		margin: 4px 0 48px;
+	}
+	.subtitle {
+		margin-bottom: 12px;
+	}
+	.description {
+		margin-bottom: 36px;
+	}
+	.description,
+	.content {
+		font-size: 18px;
+	}
+	.linksWrap {
+		margin-top: 36px;
+		.link:not(:first-child) {
+			margin-top: 4px;
+		}
+	}
+	.authorWrap {
+		margin-top: 48px;
+		background-color: $gray_light;
+		padding: 24px;
+	}
+	.authorInlineWrap {
+		display: flex;
+	}
+	.authorData {
+		margin-left: 16px;
+	}
+	.authorName {
+		margin-bottom: 4px;
+	}
+	.authorName,
+	.authorEmail {
+		font-size: 18px;
+	}
+}
