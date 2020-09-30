@@ -1,10 +1,10 @@
-import { LOGIN, LOGOUT } from "helpers/constants";
+import { SET_USER, LOGOUT } from "helpers/constants";
 import { remove } from "helpers/localStorage";
 
-export const login = (user) => {
+export const setUser = (user) => {
 	return async (dispatch) => {
 		dispatch({
-			type: LOGIN,
+			type: SET_USER,
 			payload: user
 		});
 	};

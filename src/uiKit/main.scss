@@ -13,6 +13,11 @@ body {
 	font-family: "Roboto", sans-serif;
 	background: $gray_light;
 }
+#root {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
 
 ul,
 li {

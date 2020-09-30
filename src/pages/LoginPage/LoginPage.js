@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import s from "./LoginPage.module.scss";
 import LoginForm from "forms/LoginForm/LoginForm";
 import services from "services";
-import { login } from "actions/user";
+import { setUser } from "actions/user";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { save } from "helpers/localStorage";
 import MainLayout from "layouts/MainLayout/MainLayout";
-import {USER} from "helpers/userRoles"
+import { USER } from "helpers/userRoles";
 
-const LoginPage = ({ login }) => {
+const LoginPage = ({ setUser }) => {
 	const [ loading, setLoading ] = useState(false);
 	const [ reqResult, setReqResult ] = useState({ success: false, error: null });
 	const history = useHistory();
@@ -18,11 +17,7 @@ const LoginPage = ({ login }) => {
 		services.userServices
 			.authorization(values)
 			.then((res) => {
-				login({
-					type: USER,
-					...res.data
-				});
-				save("currentUser", {
+				setUser({
 					type: USER,
 					...res.data
 				});
@@ -49,4 +44,4 @@ const LoginPage = ({ login }) => {
 	);
 };
 
-export default connect(null, { login })(LoginPage);
+export default connect(null, { setUser })(LoginPage);

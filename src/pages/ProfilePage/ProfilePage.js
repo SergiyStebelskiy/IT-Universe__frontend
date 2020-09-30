@@ -1,27 +1,31 @@
 import React, { useState, useEffect, Fragment } from "react";
 import MainLayout from "layouts/MainLayout/MainLayout";
-import { Container, Typography } from "@material-ui/core";
+import { Container, Typography, Grid, CircularProgress } from "@material-ui/core";
 import Avatar from "components/Avatar/Avatar";
 import s from "./ProfilePage.module.scss";
 import services from "services";
-import { useSelector } from "react-redux";
+import PostCard from "components/PostCard/PostCard";
+import { setUser } from "actions/user";
+import { connect } from "react-redux";
+import { USER } from "helpers/userRoles";
 
-const ProfilePage = () => {
+const ProfilePage = ({ setUser }) => {
 	const [ profile, setProfile ] = useState(null);
-	const user = useSelector((state) => state.user);
 	useEffect(
 		() => {
-			if (user._id) {
-				setProfile(user);
-			} else {
-				services.profileServices.getSelf().then(({ data }) => setProfile(data));
-			}
+			services.profileServices.getSelf().then(({ data }) => {
+				setProfile(data);
+				setUser({
+					type: USER,
+					...data
+				});
+			});
 		},
-		[ user ]
+		[ setUser ]
 	);
 	return (
 		<Fragment>
-			{profile && (
+			{profile ? (
 				<MainLayout>
 					<Container>
 						<div className={s.profileHeader}>
@@ -41,12 +45,23 @@ const ProfilePage = () => {
 									{profile.email}
 								</Typography>
 							</div>
+							<Grid container component="ul" spacing={2} className={s.userPostsWrap}>
+								{profile.posts.map((post) => (
+									<Grid item component="li" xs={6} key={post._id}>
+										<PostCard data={post} />
+									</Grid>
+								))}
+							</Grid>
 						</div>
 					</Container>
 				</MainLayout>
+			) : (
+				<div className="loaderWrap justifyCenter alignCenter">
+					<CircularProgress />
+				</div>
 			)}
 		</Fragment>
 	);
 };
 
-export default ProfilePage;
+export default connect(null, { setUser })(ProfilePage);
