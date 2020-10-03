@@ -37,3 +37,16 @@ li {
 		align-items: center;
 	}
 }
+.popupBtns {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 40px;
+	.btn {
+		min-width: 75px;
+		height: 40px;
+		&:first-child {
+			margin-right: 12px;
+			border: none;
+		}
+	}
+}

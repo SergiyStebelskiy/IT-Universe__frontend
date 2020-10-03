@@ -1,0 +1,12 @@
+.createPostForm {
+	.field {
+		width: 100%;
+		margin-top: 24px;
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+	.textEditor {
+		margin-top: 20px;
+	}
+}

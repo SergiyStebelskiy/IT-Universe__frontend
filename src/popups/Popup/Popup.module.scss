@@ -1,0 +1,34 @@
+.popupWrap {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow-y: auto;
+	background-color: rgba(black, .4);
+	padding: 2vh 0;
+	.popup {
+		background-color: white;
+		height: auto;
+		border-radius: 4px;
+		min-width: 550px;
+		position: relative;
+		padding: 16px;
+	}
+	.title {
+		margin-bottom: 8px;
+	}
+	.description {
+		margin-bottom: 24px;
+	}
+	.closeIcon {
+		position: absolute;
+		top: 16px;
+		right: 16px;
+		cursor: pointer;
+		opacity: .8;
+	}
+}

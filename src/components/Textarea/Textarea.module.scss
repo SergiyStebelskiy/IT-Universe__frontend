@@ -1,0 +1,19 @@
+@import "../../uiKit/colors";
+
+.textarea {
+	resize: none;
+	border: 1px solid rgba(0, 0, 0, 0.23);
+	padding: 6px 14px;
+	font: inherit;
+	color: currentColor;
+	border-radius: 4px;
+	&:hover {
+		border-color: rgba(0, 0, 0, 0.87);
+	}
+	&.error {
+		border-color: $red;
+		&::placeholder {
+			color: $red;
+		}
+	}
+}
