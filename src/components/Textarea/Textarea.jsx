@@ -18,7 +18,7 @@ const Textarea = ({ className, rows, rowsMax, rowsMin, placeholder, value, onCha
 				onBlur={onBlur}
 				name={name}
 			/>
-			{error && <span className="errorMessage">{error}</span>}
+			{error && <span className={classNames("errorMessage", s.errorMessage)}>{error}</span>}
 		</Fragment>
 	);
 };

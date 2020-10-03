@@ -4,7 +4,6 @@ import Input from "components/Input/Input";
 import Button from "components/Button/Button";
 import Textarea from "components/Textarea/Textarea";
 import TextEditor from "components/TextEditor/TextEditor";
-import RichTextEditor from "react-rte";
 import { useFormik } from "formik";
 import { object, string } from "yup";
 const CreatePostForm = ({ onSubmit, onClose }) => {
@@ -12,7 +11,7 @@ const CreatePostForm = ({ onSubmit, onClose }) => {
 		initialValues: {
 			title: "",
 			description: "",
-			content: RichTextEditor.createEmptyValue()
+			content: ""
 		},
 		validationSchema: object({
 			title: string()
@@ -43,7 +42,7 @@ const CreatePostForm = ({ onSubmit, onClose }) => {
 				size="small"
 				autoComplete="off"
 				autoFocus
-				error={errors.title && touched.title && errors.title}
+				error={errors.title && touched.title && Boolean(errors.title)}
 				helperText={errors.title && touched.title && errors.title}
 			/>
 			<Textarea
@@ -55,7 +54,14 @@ const CreatePostForm = ({ onSubmit, onClose }) => {
 				error={errors.description && touched.description && errors.description}
 			/>
 			<div className={s.textEditor}>
-				<TextEditor onChange={(e) => setFieldValue("content", e)} />
+				<TextEditor
+					value={values.content}
+					onChange={(content, delta, source, editor) => {
+						setFieldValue("content", content);
+						console.log(editor.getText());
+					}}
+					placeholder="Content"
+				/>
 			</div>
 			<div className="popupBtns">
 				<Button onClick={onClose} className="btn" variant="outlined" size="small">

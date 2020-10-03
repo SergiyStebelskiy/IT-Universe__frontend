@@ -32,7 +32,13 @@ const DropdownMenu = ({ nodeEl, onClose, open, data, position }) => {
 	return (
 		<StyledMenu id="navigation" anchorEl={nodeEl} onClose={onClose} open={open} position={position} keepMounted>
 			{data.map(({ title, icon, onClick }, index) => (
-				<MenuItem onClick={onClick} key={index}>
+				<MenuItem
+					onClick={() => {
+						onClick();
+						onClose();
+					}}
+					key={index}
+				>
 					<ListItemIcon style={{ minWidth: "40px" }}>{icon}</ListItemIcon>
 					<Typography variant="inherit">{title}</Typography>
 				</MenuItem>
