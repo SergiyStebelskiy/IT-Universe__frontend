@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
+import classNames from "classnames";
 import s from "./TextEditor.module.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-const TextEditor = ({ value, onChange, placeholder }) => {
+const TextEditor = ({ value, onChange, placeholder, error }) => {
 	const modules = {
 		toolbar: [
 			[ { header: [ 1, 2, false ] } ],
@@ -31,15 +32,18 @@ const TextEditor = ({ value, onChange, placeholder }) => {
 		"clean"
 	];
 	return (
-		<ReactQuill
-			theme="snow"
-			className={s.textEditor}
-			placeholder={placeholder}
-			modules={modules}
-			formats={formats}
-			value={value}
-			onChange={onChange}
-		/>
+		<Fragment>
+			<ReactQuill
+				theme="snow"
+				className={classNames(s.textEditor, { [s.error]: error })}
+				placeholder={placeholder}
+				modules={modules}
+				formats={formats}
+				defaultValue={value}
+				onChange={onChange}
+			/>
+			{error && <span className="errorMessage">{error}</span>}
+		</Fragment>
 	);
 };
 export default TextEditor;

@@ -1,0 +1,7 @@
+.createPostPopup {
+	display: block !important;
+	& > div {
+		margin: 0 auto;
+		width: 65%;
+	}
+}

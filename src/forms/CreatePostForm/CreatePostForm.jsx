@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import s from "./CreatePostForm.module.scss";
 import Input from "components/Input/Input";
 import Button from "components/Button/Button";
-import Textarea from "components/Textarea/Textarea";
 import TextEditor from "components/TextEditor/TextEditor";
 import { useFormik } from "formik";
 import { object, string } from "yup";
 const CreatePostForm = ({ onSubmit, onClose }) => {
+	const [ content, setContent ] = useState("");
 	const formik = useFormik({
 		initialValues: {
 			title: "",
@@ -22,7 +23,8 @@ const CreatePostForm = ({ onSubmit, onClose }) => {
 				.max(500, "The title is too long. It should be 500 words or less. "),
 			content: string()
 				.required("Please, type the project content")
-				.max(10000, "The content is too long. It should be 10 000 words or less. ")
+				.min(5, "The content is too short. It should be 5 000 words or more.")
+				.max(10000, "The content is too long. It should be 10 000 words or less.")
 		}),
 		onSubmit: (values) => {
 			console.log(values);
@@ -45,21 +47,27 @@ const CreatePostForm = ({ onSubmit, onClose }) => {
 				error={errors.title && touched.title && Boolean(errors.title)}
 				helperText={errors.title && touched.title && errors.title}
 			/>
-			<Textarea
+			<Input
 				className={s.field}
 				value={values.description}
 				onChange={handleChange}
-				placeholder="Description"
+				rowsMax={5}
 				name="description"
-				error={errors.description && touched.description && errors.description}
+				label="Description"
+				autoComplete="off"
+				variant="outlined"
+				error={errors.description && touched.description && Boolean(errors.description)}
+				helperText={errors.description && touched.description && errors.description}
+				multiline
 			/>
 			<div className={s.textEditor}>
 				<TextEditor
-					value={values.content}
+					value={content}
 					onChange={(content, delta, source, editor) => {
-						setFieldValue("content", content);
-						console.log(editor.getText());
+						setFieldValue("content", editor.getText().replace(/\s/g, ""));
+						setContent(content);
 					}}
+					error={errors.content && touched.content && errors.content}
 					placeholder="Content"
 				/>
 			</div>
@@ -73,5 +81,13 @@ const CreatePostForm = ({ onSubmit, onClose }) => {
 			</div>
 		</form>
 	);
+};
+CreatePostForm.propTypes = {
+	onSubmit: PropTypes.func,
+	onClose: PropTypes.func
+};
+CreatePostForm.defaultProps = {
+	onSubmit: () => {},
+	onClose: () => {}
 };
 export default CreatePostForm;

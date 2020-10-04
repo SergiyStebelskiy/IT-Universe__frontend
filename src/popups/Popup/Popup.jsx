@@ -1,12 +1,13 @@
 import React from "react";
+import classNames from "classnames";
 import s from "./Popup.module.scss";
 import { Typography } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 import Button from "components/Button/Button";
 
-const Popup = ({ title, description, children, onClose, onSubmit, dialog }) => {
+const Popup = ({ title, description, children, onClose, onSubmit, dialog, className }) => {
 	return (
-		<div className={s.popupWrap}>
+		<div className={classNames(s.popupWrap, className)}>
 			<div className={s.popup}>
 				<Typography className={s.title} variant="h5">
 					{title}
