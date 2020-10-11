@@ -22,6 +22,13 @@ export default {
 			throw error;
 		}
 	},
+	addPost: async (params) => {
+		try {
+			return await axios.get(`/posts/`, params);
+		} catch (error) {
+			throw error;
+		}
+	},
 	approvePost: async (id) => {
 		try {
 			return await axios.post(`/posts/${id}/approve`);

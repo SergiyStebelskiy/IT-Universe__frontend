@@ -45,7 +45,7 @@ const Header = ({ className, logout }) => {
 			icon: <ExitToApp />,
 			onClick: () => {
 				logout();
-				history.push("login");
+				history.push("/login");
 			}
 		}
 	];

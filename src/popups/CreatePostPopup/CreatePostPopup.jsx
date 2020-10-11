@@ -7,6 +7,7 @@ import { load } from "helpers/localStorage";
 
 const CreatePostPopup = ({ onClose, setAlert }) => {
 	const handleAddPost = (values) => {
+		console.log("tests");
 		const authorEmail = load("currentUser").email;
 		services.postsServices
 			.addPost({ ...values, author_email: authorEmail })

@@ -29,6 +29,7 @@ const CreatePostForm = ({ onSubmit, onClose }) => {
 				.max(10000, "The content is too long. It should be 10 000 words or less.")
 		}),
 		onSubmit: (values) => {
+			console.log("test");
 			onSubmit({
 				...values,
 				content
