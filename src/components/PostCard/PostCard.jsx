@@ -13,7 +13,7 @@ const PostCard = ({ data, onRead, withTitleLink }) => {
 			<CardContent>
 				<header className={s.header}>
 					{withTitleLink ? (
-						<Link to={`/posts/${_id}`} className={s.titleLink}>
+						<Link to={`/posts/${_id}`} target="_blank" className={s.titleLink}>
 							<Typography className={s.title} variant="h5" component="h2">
 								{title}
 							</Typography>
@@ -31,7 +31,7 @@ const PostCard = ({ data, onRead, withTitleLink }) => {
 				</Typography>
 			</CardContent>
 			<CardActions>
-				<Button size="small" onClick={() => onRead(data)}>
+				<Button size="small" onClick={() => onRead(data)} className={s.readBtn}>
 					Read More
 				</Button>
 			</CardActions>

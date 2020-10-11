@@ -5,17 +5,17 @@ import DropListTrigger from "components/DropListTrigger/DropListTrigger";
 import PostContainer from "containers/PostContainer/PostContainer";
 import { Container } from "@material-ui/core";
 
-const droplistData = [
-	{
-		title: "Approve",
-		onClick: () => {}
-	},
-	{
-		title: "Reject",
-		onClick: () => {}
-	}
-];
-const ViewPostPopup = ({ onClose, data }) => {
+const ViewPostPopup = ({ onClose, data, onApprove, onReject }) => {
+	const droplistData = [
+		{
+			title: "Approve",
+			onClick: () => onApprove()
+		},
+		{
+			title: "Reject",
+			onClick: () => onReject()
+		}
+	];
 	return (
 		<Popup title="View post" onClose={onClose} className={s.viewPostPopup}>
 			<Container style={{ display: "flex", flexDirection: "column" }}>

@@ -3,10 +3,13 @@ import s from "./PostsContainer.module.scss";
 import { Container, Typography, Grid, CircularProgress } from "@material-ui/core";
 import PostCard from "components/PostCard/PostCard";
 import services from "services";
+import { useHistory } from "react-router-dom";
 
 const PostsContainer = () => {
 	const [ posts, setPosts ] = useState([]);
 	const [ loading, setLoading ] = useState(false);
+	const history = useHistory();
+
 	useEffect(() => {
 		setLoading(true);
 		services.postsServices.getPosts().then(({ data }) => {
@@ -24,7 +27,7 @@ const PostsContainer = () => {
 					<Grid container component="ul" spacing={2}>
 						{posts.map((post) => (
 							<Grid item component="li" xs={6} key={post._id}>
-								<PostCard data={post} />
+								<PostCard data={post} onRead={(e) => history.push(`/posts/${e._id}`)} />
 							</Grid>
 						))}
 					</Grid>
