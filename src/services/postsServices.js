@@ -24,7 +24,7 @@ export default {
 	},
 	addPost: async (params) => {
 		try {
-			return await axios.get(`/posts/`, params);
+			return await axios.post(`/posts/`, params);
 		} catch (error) {
 			throw error;
 		}
