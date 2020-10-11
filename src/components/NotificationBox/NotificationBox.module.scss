@@ -1,0 +1,28 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.alert {
+  position: fixed;
+  bottom: 32px;
+  align-items: center;
+  height: 64px;
+  padding-left: 34px !important;
+  padding-right: 20px !important;
+  z-index: 9999;
+}
+.success {
+  background-color: #caeeca !important;
+}
+
+[class="MuiAlert-message"] {
+  padding-left: 4px !important;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 150%;
+  color: rgba(0, 0, 0, 0.9);
+}

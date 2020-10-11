@@ -1,0 +1,10 @@
+.viewPostPopup {
+	& > div {
+		width: 88vw;
+	}
+	.dropListTrigger {
+		position: absolute !important;
+		right: 55px;
+		top: 16px;
+	}
+}

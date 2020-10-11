@@ -6,16 +6,20 @@ import s from "./Header.module.scss";
 import { Link } from "react-router-dom";
 import DropdownMenu from "components/DropdownMenu/DropdownMenu";
 import Button from "components/Button/Button";
-import { Person, ExitToApp, Add } from "@material-ui/icons";
+import { Person, ExitToApp, Add, QueryBuilder } from "@material-ui/icons";
 import { useHistory } from "react-router-dom";
 import { logout } from "actions/user";
 import { connect } from "react-redux";
 import { load } from "helpers/localStorage";
 import CreatePostPopup from "popups/CreatePostPopup/CreatePostPopup";
+import NotificationBox from "components/NotificationBox/NotificationBox";
+import { ADMIN } from "helpers/userRoles";
 
 const Header = ({ className, logout }) => {
 	const [ anchorEl, setAnchorEl ] = useState(null);
-	const [ createPostPopup, setCreatePostPopup ] = useState(true);
+	const [ createPostPopup, setCreatePostPopup ] = useState(false);
+	const [ alert, setAlert ] = useState({ type: "", message: "" });
+
 	const open = Boolean(anchorEl);
 	const history = useHistory();
 	const user = load("currentUser");
@@ -24,6 +28,12 @@ const Header = ({ className, logout }) => {
 			title: "Profile",
 			icon: <Person />,
 			onClick: () => history.push("/profile")
+		},
+		user &&
+		user.type === ADMIN && {
+			title: "Requests posts",
+			icon: <QueryBuilder />,
+			onClick: () => history.push("/requests-posts")
 		},
 		{
 			title: "Create post",
@@ -81,7 +91,14 @@ const Header = ({ className, logout }) => {
 					)}
 				</div>
 			</Container>
-			{createPostPopup && <CreatePostPopup onClose={() => setCreatePostPopup(false)} />}
+			{createPostPopup && <CreatePostPopup onClose={() => setCreatePostPopup(false)} setAlert={setAlert} />}
+			{alert.message.length > 0 && (
+				<NotificationBox
+					type={alert.type}
+					message={alert.message}
+					onClose={() => setAlert({ type: "", message: "" })}
+				/>
+			)}
 		</header>
 	);
 };

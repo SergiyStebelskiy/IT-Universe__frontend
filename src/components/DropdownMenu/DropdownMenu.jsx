@@ -31,18 +31,23 @@ const StyledMenu = withStyles({
 const DropdownMenu = ({ nodeEl, onClose, open, data, position }) => {
 	return (
 		<StyledMenu id="navigation" anchorEl={nodeEl} onClose={onClose} open={open} position={position} keepMounted>
-			{data.map(({ title, icon, onClick }, index) => (
-				<MenuItem
-					onClick={() => {
-						onClick();
-						onClose();
-					}}
-					key={index}
-				>
-					<ListItemIcon style={{ minWidth: "40px" }}>{icon}</ListItemIcon>
-					<Typography variant="inherit">{title}</Typography>
-				</MenuItem>
-			))}
+			{data.map(({ title, icon, onClick }, index) => {
+				return (
+					title &&
+					onClick && (
+						<MenuItem
+							onClick={() => {
+								onClick();
+								onClose();
+							}}
+							key={index}
+						>
+							{icon && <ListItemIcon style={{ minWidth: "40px" }}>{icon}</ListItemIcon>}
+							<Typography variant="inherit">{title}</Typography>
+						</MenuItem>
+					)
+				);
+			})}
 		</StyledMenu>
 	);
 };

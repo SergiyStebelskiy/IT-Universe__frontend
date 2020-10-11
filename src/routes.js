@@ -1,12 +1,13 @@
-import { GUEST, USER } from "helpers/userRoles";
+import { GUEST, USER, ADMIN } from "helpers/userRoles";
 import LoginPage from "pages/LoginPage/LoginPage";
 import RegistrationPage from "pages/RegistrationPage/RegistrationPage";
 import ProfilePage from "pages/ProfilePage/ProfilePage";
 import HomePage from "pages/HomePage/HomePage";
 import PostPage from "pages/PostPage/PostPage";
+import RequestsPostsPage from "pages/RequestsPostsPage/RequestsPostsPage";
 
-const allTypes = `${GUEST}, ${USER}`;
-const authorized = `${USER}`;
+const allTypes = `${GUEST}, ${USER}, ${ADMIN}`;
+const authorized = `${USER}, ${ADMIN}`;
 
 const routes = [
 	{
@@ -34,6 +35,11 @@ const routes = [
 		Component: PostPage,
 		path: "/posts/:id",
 		allowed: allTypes
+	},
+	{
+		Component: RequestsPostsPage,
+		path: "/requests-posts",
+		allowed: ADMIN
 	}
 ];
 export default routes;

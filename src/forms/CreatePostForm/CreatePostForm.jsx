@@ -17,18 +17,22 @@ const CreatePostForm = ({ onSubmit, onClose }) => {
 		validationSchema: object({
 			title: string()
 				.required("Please, type the project title")
+				.min(6, "The title is too short. It should be 6 words or more.")
 				.max(300, "The title is too long. It should be 300 words or less. "),
 			description: string()
 				.required("Please, type the project description")
+				.min(6, "The description is too short. It should be 6 words or more.")
 				.max(500, "The title is too long. It should be 500 words or less. "),
 			content: string()
 				.required("Please, type the project content")
-				.min(5, "The content is too short. It should be 5 000 words or more.")
+				.min(700, "The content is too short. It should be 5 000 words or more.")
 				.max(10000, "The content is too long. It should be 10 000 words or less.")
 		}),
 		onSubmit: (values) => {
-			console.log(values);
-			onSubmit(values);
+			onSubmit({
+				...values,
+				content
+			});
 		}
 	});
 	const { handleSubmit, handleChange, values, errors, touched, setFieldValue } = formik;

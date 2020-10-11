@@ -21,6 +21,13 @@
 	.content {
 		font-size: 18px;
 	}
+	.content {
+		ol {
+			li {
+				list-style-type: decimal;
+			}
+		}
+	}
 	.linksWrap {
 		margin-top: 36px;
 		.link:not(:first-child) {

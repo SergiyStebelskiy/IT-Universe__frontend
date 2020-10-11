@@ -1,0 +1,28 @@
+@import "../../uiKit/colors";
+
+.wrapDropListTrigger {
+	position: relative;
+	display: flex;
+	align-items: center;
+	opacity: 1;
+}
+
+.trigger {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	outline: none;
+	border-radius: 2px;
+	padding: 0;
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+	transition: 0.3s all ease;
+	background-color: transparent;
+	.menu {
+		display: block;
+		width: 20px;
+		height: auto;
+	}
+}

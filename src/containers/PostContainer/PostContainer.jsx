@@ -1,35 +1,14 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { Fragment } from "react";
 import s from "./PostContainer.module.scss";
 import { Typography, Link } from "@material-ui/core";
 import moment from "moment";
 import Avatar from "components/Avatar/Avatar";
-import services from "services";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
 import Button from "components/Button/Button";
 
-const PostContainer = () => {
-	const [ data, setData ] = useState(null);
-	const [ loading, setLoading ] = useState(false);
-	const [ error, setError ] = useState(null);
-	const params = useParams();
+const PostContainer = ({ data, loading, error }) => {
 	const history = useHistory();
-	useEffect(
-		() => {
-			setLoading(true);
-			services.postsServices
-				.getPost(params.id)
-				.then(({ data }) => {
-					setData(data);
-					setLoading(false);
-				})
-				.catch((error) => {
-					setError(error.response.status);
-					setLoading(false);
-				});
-		},
-		[ params.id ]
-	);
 	return (
 		<main className={s.postPage}>
 			{data && (
@@ -43,10 +22,13 @@ const PostContainer = () => {
 					<Typography className={s.description} variant="body1">
 						{data.description}
 					</Typography>
-					<Typography className={s.content} variant="body1">
-						{data.content}
-					</Typography>
-					{data.links.length > 0 && (
+					<Typography
+						className={s.content}
+						variant="body1"
+						dangerouslySetInnerHTML={{ __html: data.content }}
+					/>
+					{data.links &&
+					data.links.length > 0 && (
 						<div className={s.linksWrap}>
 							<Typography className={s.subtitle} variant="h6">
 								Links:

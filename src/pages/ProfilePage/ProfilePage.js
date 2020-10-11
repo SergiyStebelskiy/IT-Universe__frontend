@@ -8,9 +8,12 @@ import PostCard from "components/PostCard/PostCard";
 import { setUser } from "actions/user";
 import { connect } from "react-redux";
 import { USER } from "helpers/userRoles";
+import { useHistory } from "react-router-dom";
 
 const ProfilePage = ({ setUser }) => {
 	const [ profile, setProfile ] = useState(null);
+	const history = useHistory();
+
 	useEffect(
 		() => {
 			services.profileServices.getSelf().then(({ data }) => {
@@ -48,7 +51,7 @@ const ProfilePage = ({ setUser }) => {
 							<Grid container component="ul" spacing={2} className={s.userPostsWrap}>
 								{profile.posts.map((post) => (
 									<Grid item component="li" xs={6} key={post._id}>
-										<PostCard data={post} />
+										<PostCard data={post} onRead={(e) => history.push(`/posts/${e._id}`)} />
 									</Grid>
 								))}
 							</Grid>

@@ -12,7 +12,7 @@ let initialState = {
 	avatarIndex: null,
 	posts: []
 };
-
+console.log(initialState);
 if (savedUser) {
 	initialState = savedUser;
 }
