@@ -2,22 +2,17 @@ import React, { useState, useEffect, Fragment } from "react";
 import MainLayout from "layouts/MainLayout/MainLayout";
 import { Container, CircularProgress } from "@material-ui/core";
 import services from "services";
-import { setUser } from "actions/user";
-import { connect } from "react-redux";
-import { USER } from "helpers/userRoles";
 import ProfileContainer from "containers/ProfileContainer/ProfileContainer";
+import { useParams } from "react-router-dom";
 
-const ProfilePage = ({ setUser }) => {
+const UserPage = () => {
   const [profile, setProfile] = useState(null);
+  const params = useParams();
   useEffect(() => {
-    services.profileServices.getSelf().then(({ data }) => {
+    services.userServices.getUser(params.id).then(({ data }) => {
       setProfile(data);
-      setUser({
-        type: USER,
-        ...data,
-      });
     });
-  }, [setUser]);
+  }, [params.id]);
   return (
     <Fragment>
       {profile ? (
@@ -35,4 +30,4 @@ const ProfilePage = ({ setUser }) => {
   );
 };
 
-export default connect(null, { setUser })(ProfilePage);
+export default UserPage;

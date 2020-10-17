@@ -1,0 +1,40 @@
+.searchBar {
+  margin-left: 150px;
+  position: relative;
+  .searchField {
+    background-color: rgba(white, 0.85);
+    border-radius: 4px;
+    fieldset {
+      border-color: rgba(black, 0.2);
+    }
+    &:hover {
+      fieldset {
+        border-color: rgba(black, 0.4);
+      }
+    }
+  }
+  .users {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: white;
+    border-radius: 4px;
+    padding: 4px 0;
+    width: 240px;
+    max-height: 345px;
+    z-index: 99;
+    overflow-y: auto;
+  }
+  .item {
+    width: 100%;
+    display: flex;
+    padding: 8px 12px;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(black, 0.1);
+    }
+  }
+  .userData {
+    margin-left: 8px;
+  }
+}
