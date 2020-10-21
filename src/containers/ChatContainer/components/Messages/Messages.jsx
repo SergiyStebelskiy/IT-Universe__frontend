@@ -6,9 +6,7 @@ const Messages = ({ data = [], user = {} }) => {
   const messageRef = useRef(null);
   useEffect(() => {
     if (messageRef.current) {
-      messageRef.current.scrollIntoView({
-        behavior: "smooth",
-      });
+      messageRef.current.scrollIntoView();
     }
   }, [data]);
   return (

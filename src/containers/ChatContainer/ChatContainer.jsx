@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import services from "services";
 import { CircularProgress } from "@material-ui/core";
+import socket from "socket";
 
 const ChatContainer = () => {
   const [chats, setChats] = useState([]);
@@ -30,10 +31,21 @@ const ChatContainer = () => {
         setCurrentChat(res.data);
         setLoading(false);
       });
+      socket.emit("CONNECT", params.id);
     } else {
       setLoading(false);
     }
   }, [params.id]);
+
+  useEffect(() => {
+    currentChat &&
+      socket.on("ADD_MESSAGE", (message) => {
+        setCurrentChat({
+          ...currentChat,
+          messages: [...currentChat.messages, message],
+        });
+      });
+  }, [currentChat]);
 
   const handleAddMessage = async (text) => {
     await services.chatServices
@@ -42,6 +54,11 @@ const ChatContainer = () => {
         setCurrentChat({
           ...currentChat,
           messages: [...currentChat.messages, res.data],
+        });
+        socket.emit("ADD_MESSAGE", {
+          author: user._id,
+          text,
+          chat: currentChat,
         });
       });
   };
