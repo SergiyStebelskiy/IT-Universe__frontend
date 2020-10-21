@@ -9,6 +9,7 @@ import ProfileContainer from "containers/ProfileContainer/ProfileContainer";
 
 const ProfilePage = ({ setUser }) => {
   const [profile, setProfile] = useState(null);
+
   useEffect(() => {
     services.profileServices.getSelf().then(({ data }) => {
       setProfile(data);

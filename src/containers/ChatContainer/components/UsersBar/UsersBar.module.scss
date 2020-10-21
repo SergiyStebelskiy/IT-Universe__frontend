@@ -1,0 +1,19 @@
+.usersBar {
+  width: 300px;
+  border-right: 1px solid rgba(black, 0.1);
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  .user {
+    padding: 12px 8px;
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+    &:hover {
+      background: rgba(black, 0.05);
+    }
+  }
+  .userData {
+    margin-left: 8px;
+  }
+}

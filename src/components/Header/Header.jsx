@@ -6,7 +6,7 @@ import s from "./Header.module.scss";
 import { Link } from "react-router-dom";
 import DropdownMenu from "components/DropdownMenu/DropdownMenu";
 import Button from "components/Button/Button";
-import { Person, ExitToApp, Add, QueryBuilder } from "@material-ui/icons";
+import { Person, ExitToApp, Add, QueryBuilder, Chat } from "@material-ui/icons";
 import { useHistory } from "react-router-dom";
 import { logout } from "actions/user";
 import { connect } from "react-redux";
@@ -29,6 +29,11 @@ const Header = ({ className, logout }) => {
       title: "Profile",
       icon: <Person />,
       onClick: () => history.push("/profile"),
+    },
+    {
+      title: "Messages",
+      icon: <Chat />,
+      onClick: () => history.push("/chats"),
     },
     user &&
       user.type === ADMIN && {

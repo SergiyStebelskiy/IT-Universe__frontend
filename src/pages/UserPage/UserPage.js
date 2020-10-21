@@ -18,7 +18,7 @@ const UserPage = () => {
       {profile ? (
         <MainLayout>
           <Container>
-            <ProfileContainer data={profile} />
+            <ProfileContainer data={profile} preview />
           </Container>
         </MainLayout>
       ) : (

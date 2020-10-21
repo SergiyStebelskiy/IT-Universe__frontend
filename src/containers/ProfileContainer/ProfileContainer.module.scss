@@ -9,7 +9,7 @@
     box-shadow: $light;
     border-radius: 6px;
     text-align: center;
-    padding: 32px 24px;
+    padding: 32px 24px 28px;
     .avatar {
       margin: 0 auto;
     }
@@ -18,6 +18,11 @@
     }
     .email {
       opacity: 0.9;
+    }
+    .chatBtn {
+      width: 100%;
+      height: 40px;
+      margin-top: 16px;
     }
   }
   .userPostsWrap {

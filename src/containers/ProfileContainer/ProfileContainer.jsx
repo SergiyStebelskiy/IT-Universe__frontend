@@ -3,11 +3,22 @@ import s from "./ProfileContainer.module.scss";
 import { Typography, Grid } from "@material-ui/core";
 import Avatar from "components/Avatar/Avatar";
 import PostCard from "components/PostCard/PostCard";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import Button from "components/Button/Button";
+import services from "services";
+import { useSelector } from "react-redux";
 
-const ProfileContainer = ({ data }) => {
+const ProfileContainer = ({ data, preview }) => {
   const history = useHistory();
-
+  const params = useParams();
+  const user = useSelector((state) => state.user);
+  const handleCreateChat = () => {
+    services.chatServices
+      .createChat({ users: [params.id, user._id] })
+      .then((res) => {
+        history.push(`/chats/${res.data._id}`);
+      });
+  };
   const { avatarIndex, name, email, posts } = data;
   return (
     <div className={s.profileHeader}>
@@ -26,6 +37,17 @@ const ProfileContainer = ({ data }) => {
         <Typography className={s.email} variant="subtitle1">
           {email}
         </Typography>
+        {preview && params.id !== user._id && (
+          <Button
+            className={s.chatBtn}
+            variant="contained"
+            color="primary"
+            size="small"
+            onClick={handleCreateChat}
+          >
+            Chat
+          </Button>
+        )}
       </div>
       <Grid container component="ul" spacing={2} className={s.userPostsWrap}>
         {posts.map((post) => (

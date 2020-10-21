@@ -1,0 +1,11 @@
+.chatHeader {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  background-color: white;
+  border-bottom: 1px solid rgba(black, 0.1);
+  cursor: pointer;
+  .userName {
+    margin-left: 12px;
+  }
+}

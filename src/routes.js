@@ -6,6 +6,7 @@ import HomePage from "pages/HomePage/HomePage";
 import PostPage from "pages/PostPage/PostPage";
 import RequestsPostsPage from "pages/RequestsPostsPage/RequestsPostsPage";
 import UserPage from "pages/UserPage/UserPage";
+import ChatPage from "pages/ChatPage/ChatPage";
 
 const allTypes = `${GUEST}, ${USER}, ${ADMIN}`;
 const authorized = `${USER}, ${ADMIN}`;
@@ -46,6 +47,11 @@ const routes = [
     Component: UserPage,
     path: "/users/:id",
     allowed: allTypes,
+  },
+  {
+    Component: ChatPage,
+    path: "/chats/:id?",
+    allowed: authorized,
   },
 ];
 export default routes;
