@@ -2,15 +2,14 @@ import React from "react";
 import s from "./UsersBar.module.scss";
 import Avatar from "components/Avatar/Avatar";
 import { Typography } from "@material-ui/core";
-import { useHistory, useParams } from "react-router-dom";
-import socket from "socket";
+import { useHistory } from "react-router-dom";
 
 const UsersBar = ({ data = [], user }) => {
   const history = useHistory();
-  const params = useParams();
   const getUser = (chat) => {
     return chat.users.filter((e) => e._id !== user._id)[0];
   };
+  console.log(data);
   return (
     <div className={s.usersBarWrap}>
       <ul className={s.usersBar}>
@@ -20,7 +19,6 @@ const UsersBar = ({ data = [], user }) => {
             key={index}
             onClick={() => {
               history.push(`/chats/${chat._id}`);
-              socket.emit("CONNECT", params.id);
             }}
           >
             <Avatar
@@ -28,6 +26,7 @@ const UsersBar = ({ data = [], user }) => {
                 name: getUser(chat).name,
                 index: getUser(chat).avatarIndex,
               }}
+              online={getUser(chat).online}
             />
             <div className={s.userData}>
               <Typography variant="h6">{getUser(chat).name}</Typography>

@@ -7,18 +7,17 @@ import { useHistory, useParams } from "react-router-dom";
 import Button from "components/Button/Button";
 import services from "services";
 import { useSelector } from "react-redux";
-import socket from "socket";
 
 const ProfileContainer = ({ data, preview }) => {
   const history = useHistory();
   const params = useParams();
   const user = useSelector((state) => state.user);
+
   const handleCreateChat = () => {
     services.chatServices
       .createChat({ users: [params.id, user._id] })
       .then((res) => {
         history.push(`/chats/${res.data._id}`);
-        socket.emit("CONNECT", res.data._id);
       });
   };
   const { avatarIndex, name, email, posts } = data;

@@ -5,42 +5,42 @@ import { GUEST, USER } from "helpers/userRoles";
 const savedUser = load("currentUser");
 
 let initialState = {
-	type: GUEST,
-	_id: "",
-	name: "",
-	email: "",
-	avatarIndex: null,
-	posts: []
+  type: GUEST,
+  _id: "",
+  name: "",
+  email: "",
+  avatarIndex: null,
+  posts: [],
 };
-console.log(initialState);
 if (savedUser) {
-	initialState = savedUser;
+  initialState = savedUser;
 }
 
 const user = (state = initialState, action) => {
-	const { type, payload } = action;
-	switch (type) {
-		case SET_USER: {
-			save("currentUser", {
-				type: USER,
-				...payload
-			});
-			return payload;
-		}
-		case LOGOUT: {
-			return {
-				type: GUEST,
-				_id: "",
-				name: "",
-				email: "",
-				avatarIndex: null,
-				posts: []
-			};
-		}
-		default: {
-			return state;
-		}
-	}
+  const { type, payload } = action;
+  switch (type) {
+    case SET_USER: {
+      save("currentUser", {
+        type: USER,
+        ...payload,
+      });
+      return payload;
+    }
+    case LOGOUT: {
+      return {
+        type: GUEST,
+        _id: "",
+        name: "",
+        email: "",
+        avatarIndex: null,
+        posts: [],
+        online: true,
+      };
+    }
+    default: {
+      return state;
+    }
+  }
 };
 
 export default user;

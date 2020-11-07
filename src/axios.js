@@ -5,8 +5,8 @@ const CancelToken = axios.CancelToken;
 export let source = CancelToken.source();
 
 const accessToken = load("accessToken");
-// const baseURL = "https://it-universe.herokuapp.com";
-const baseURL = "http://localhost:3333";
+const baseURL = "https://it-universe.herokuapp.com";
+// const baseURL = "http://localhost:3333";
 
 const addAccessTokenToRequestsHeader = (agent, accessToken) => {
   if (accessToken) {

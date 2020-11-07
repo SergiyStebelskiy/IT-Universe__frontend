@@ -68,8 +68,6 @@ const Header = ({ className, logout }) => {
           {user ? (
             <div>
               <Avatar
-                aria-controls="navigation"
-                aria-haspopup="true"
                 className={s.avatar}
                 onClick={(e) => setAnchorEl(e.currentTarget)}
                 avatar={{

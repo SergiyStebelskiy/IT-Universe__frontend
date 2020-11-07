@@ -14,28 +14,54 @@ const ChatContainer = () => {
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [loading, setLoading] = useState(true);
-
   const params = useParams();
-  const user = useSelector((state) => state.user);
-
+  const { user, onlineUsers } = useSelector((state) => state);
+  useEffect(() => {
+    currentChat &&
+      setCurrentChat((currentChat) => ({
+        ...currentChat,
+        users: currentChat.users.map((user) => {
+          return {
+            ...user,
+            online: Boolean(onlineUsers.filter((e) => user.email === e).length),
+          };
+        }),
+      }));
+  }, [onlineUsers]);
   useEffect(() => {
     services.chatServices.getUserChats(user._id).then((res) => {
-      console.log(res.data);
-      setChats(res.data);
+      const chats = res.data.map((chat) => {
+        const newUsers = chat.users.map((user) => {
+          return {
+            ...user,
+            online: Boolean(onlineUsers.filter((e) => user.email === e).length),
+          };
+        });
+        return {
+          ...chat,
+          users: newUsers,
+        };
+      });
+      setChats(chats);
     });
-  }, [user._id]);
+  }, [user._id, onlineUsers]);
   useEffect(() => {
     setLoading(true);
     if (params.id) {
       services.chatServices.getChat(params.id).then((res) => {
-        setCurrentChat(res.data);
+        const newUsers = res.data.users.map((user) => {
+          return {
+            ...user,
+            online: Boolean(onlineUsers.filter((e) => user.email === e).length),
+          };
+        });
+        setCurrentChat({ ...res.data, users: newUsers });
         setLoading(false);
       });
-      socket.emit("CONNECT", params.id);
     } else {
       setLoading(false);
     }
-  }, [params.id]);
+  }, [params.id, onlineUsers]);
 
   useEffect(() => {
     currentChat &&
@@ -55,10 +81,12 @@ const ChatContainer = () => {
           ...currentChat,
           messages: [...currentChat.messages, res.data],
         });
+        const recipient = currentChat.users.filter(
+          (e) => e.email !== user.email
+        )[0];
         socket.emit("ADD_MESSAGE", {
-          author: user._id,
-          text,
-          chat: currentChat,
+          recipient: recipient.email,
+          message: res.data,
         });
       });
   };

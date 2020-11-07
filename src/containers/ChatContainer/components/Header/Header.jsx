@@ -11,10 +11,18 @@ const Header = ({ data = {} }) => {
       className={s.chatHeader}
       onClick={() => history.push(`/users/${data._id}`)}
     >
-      <Avatar avatar={{ name: data.name, index: data.avatarIndex }} />
-      <Typography className={s.userName} variant="h6">
-        {data.name}
-      </Typography>
+      <Avatar
+        avatar={{ name: data.name, index: data.avatarIndex }}
+        online={data.online}
+      />
+      <div className={s.data}>
+        <Typography className={s.userName} variant="h6">
+          {data.name}
+        </Typography>
+        <Typography className={s.userEmail} variant="body1">
+          {data.email}
+        </Typography>
+      </div>
     </header>
   );
 };
