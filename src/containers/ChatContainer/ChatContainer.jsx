@@ -16,35 +16,12 @@ const ChatContainer = () => {
   const [loading, setLoading] = useState(true);
   const params = useParams();
   const { user, onlineUsers } = useSelector((state) => state);
-  useEffect(() => {
-    currentChat &&
-      setCurrentChat((currentChat) => ({
-        ...currentChat,
-        users: currentChat.users.map((user) => {
-          return {
-            ...user,
-            online: Boolean(onlineUsers.filter((e) => user.email === e).length),
-          };
-        }),
-      }));
-  }, [onlineUsers]);
+
   useEffect(() => {
     services.chatServices.getUserChats(user._id).then((res) => {
-      const chats = res.data.map((chat) => {
-        const newUsers = chat.users.map((user) => {
-          return {
-            ...user,
-            online: Boolean(onlineUsers.filter((e) => user.email === e).length),
-          };
-        });
-        return {
-          ...chat,
-          users: newUsers,
-        };
-      });
-      setChats(chats);
+      setChats(res.data);
     });
-  }, [user._id, onlineUsers]);
+  }, [user._id]);
   useEffect(() => {
     setLoading(true);
     if (params.id) {
@@ -52,7 +29,9 @@ const ChatContainer = () => {
         const newUsers = res.data.users.map((user) => {
           return {
             ...user,
-            online: Boolean(onlineUsers.filter((e) => user.email === e).length),
+            online: Boolean(
+              onlineUsers.data.filter((e) => user.email === e.email).length
+            ),
           };
         });
         setCurrentChat({ ...res.data, users: newUsers });

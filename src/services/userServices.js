@@ -36,4 +36,11 @@ export default {
       throw error;
     }
   },
+  getOnlineUsers: async () => {
+    try {
+      return await axios.get("/online-users");
+    } catch (error) {
+      throw error;
+    }
+  },
 };

@@ -5,6 +5,7 @@ import { ADMIN, GUEST, USER } from "helpers/userRoles";
 import socket from "socket";
 import { setOnlineUsers } from "actions/onlineUsers";
 import { connect } from "react-redux";
+import services from "services";
 
 const RouteWithSubRoutes = ({
   allowed,
@@ -13,14 +14,21 @@ const RouteWithSubRoutes = ({
   Component,
   setOnlineUsers,
 }) => {
-  const user = useSelector((state) => state.user);
+  const { user, onlineUsers } = useSelector((state) => state);
   useEffect(() => {
-    user.type !== GUEST && socket.emit("CONNECT", user.email);
-    socket.on("ONLINE_USERS", (users) => {
-      console.log("online users:", users);
-      setOnlineUsers([...users, user.email]);
-    });
-  }, [user, setOnlineUsers]);
+    if (user.type !== GUEST) {
+      socket.emit("CONNECT", user.email);
+      socket.on("ONLINE_USERS", (users) => {
+        console.log("online users:", users);
+        setOnlineUsers({ data: [...users, user] });
+      });
+    }
+    if (!onlineUsers.flag && user.type !== GUEST) {
+      services.userServices.getOnlineUsers().then((res) => {
+        setOnlineUsers({ data: res.data, flag: true });
+      });
+    }
+  }, [user]);
 
   if (!allowed.includes(user.type)) {
     switch (user.type) {

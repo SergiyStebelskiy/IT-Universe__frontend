@@ -9,7 +9,6 @@ const UsersBar = ({ data = [], user }) => {
   const getUser = (chat) => {
     return chat.users.filter((e) => e._id !== user._id)[0];
   };
-  console.log(data);
   return (
     <div className={s.usersBarWrap}>
       <ul className={s.usersBar}>
@@ -26,7 +25,6 @@ const UsersBar = ({ data = [], user }) => {
                 name: getUser(chat).name,
                 index: getUser(chat).avatarIndex,
               }}
-              online={getUser(chat).online}
             />
             <div className={s.userData}>
               <Typography variant="h6">{getUser(chat).name}</Typography>
