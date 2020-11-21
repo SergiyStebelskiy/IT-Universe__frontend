@@ -16,7 +16,6 @@ const ChatContainer = () => {
   const [loading, setLoading] = useState(true);
   const params = useParams();
   const { user, onlineUsers } = useSelector((state) => state);
-
   useEffect(() => {
     services.chatServices.getUserChats(user._id).then((res) => {
       setChats(res.data);
